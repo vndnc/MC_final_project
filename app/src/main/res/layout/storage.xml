@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="left|center"
+        android:text="추억 저장하기"
+        android:textSize="25dp" />
+
+    <ImageView
+        android:id="@+id/insertPhoto"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="left|center"
+            android:text="함께한 사람 : "
+            android:textSize="20dp" />
+        <EditText
+            android:id="@+id/people"
+            android:text=""
+            android:hint="--"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="left|center"
+            android:text="촬영한 날짜 : "
+            android:textSize="20dp" />
+        <EditText
+            android:id="@+id/date"
+            android:text=""
+            android:hint="--"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="left|center"
+            android:text="촬영한 장소 : "
+            android:textSize="20dp" />
+        <EditText
+            android:id="@+id/palce"
+            android:text=""
+            android:hint="--"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="left|center"
+        android:text="추억 기록"
+        android:textSize="20dp" />
+    <EditText
+        android:id="@+id/memo"
+        android:textMultiLine=""
+        android:hint="--"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
