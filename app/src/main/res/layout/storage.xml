@@ -78,9 +78,10 @@
         android:gravity="left|center"
         android:text="추억 기록"
         android:textSize="20dp" />
+    <!--의존성 문제가 있어서 android:textMultiLine을 android:inputType="textMultiLine"로 대치-->
     <EditText
         android:id="@+id/memo"
-        android:textMultiLine=""
+        android:inputType="textMultiLine"
         android:hint="--"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
