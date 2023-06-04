@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.mc_finalproject.databinding.SearchFragDateBinding
+import com.example.mc_finalproject.databinding.SearchFragNameBinding
 
-class SearchFragment: Fragment() {
+class SearchFragmentName : Fragment(){
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? { // 날짜 검색을 default로 보여주기.
-        return SearchFragDateBinding.inflate(inflater, container, false).root
+    ): View? { // 이름 검색으로 바꿀 경우
+        return SearchFragNameBinding.inflate(inflater, container, false).root
     }
 }
