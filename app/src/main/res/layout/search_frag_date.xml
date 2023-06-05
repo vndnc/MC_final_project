@@ -5,25 +5,7 @@
     android:orientation="vertical"
     >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/searchDateBut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="날짜로 검색"/>
-
-        <Button
-            android:id="@+id/searchNameBut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="이름으로 검색"/>
-    </LinearLayout>
-
-    <EditText
+    <TextView
         android:id="@+id/searchName"
         android:hint="날짜로 사진을 검색하세요."
         android:text=""
