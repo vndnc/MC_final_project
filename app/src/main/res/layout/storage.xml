@@ -12,10 +12,19 @@
         android:text="추억 저장하기"
         android:textSize="25dp" />
 
+    <!--버튼누르면 갤러리 이동하기위해 추가-->
+    <Button
+        android:id="@+id/galBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사진 불러오기"/>
+
+    <!--기본 이미지 교체해야함-->
     <ImageView
         android:id="@+id/insertPhoto"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:src="@drawable/ic_launcher_foreground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
     <LinearLayout
@@ -87,7 +96,7 @@
         android:layout_height="wrap_content"/>
     <!--저장 버튼 추가-->
     <Button
-        android:id="@+id/insertbtn"
+        android:id="@+id/insertBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="저장"/>
