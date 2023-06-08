@@ -74,7 +74,7 @@
             android:text="촬영한 장소 : "
             android:textSize="20dp" />
         <EditText
-            android:id="@+id/palce"
+            android:id="@+id/place"
             android:text=""
             android:hint="--"
             android:layout_width="match_parent"
