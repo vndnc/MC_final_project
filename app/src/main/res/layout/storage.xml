@@ -14,8 +14,8 @@
 
     <ImageView
         android:id="@+id/insertPhoto"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_gravity="center" />
 
     <LinearLayout
@@ -84,5 +84,11 @@
         android:inputType="textMultiLine"
         android:hint="--"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"/>
+    <!--저장 버튼 추가-->
+    <Button
+        android:id="@+id/insertbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="저장"/>
 </LinearLayout>

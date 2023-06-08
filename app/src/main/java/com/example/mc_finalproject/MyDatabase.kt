@@ -12,6 +12,7 @@ class MyDatabase {
             const val TABLE_NAME = "myDBfile"
             const val image = "image"
             const val date = "date"
+            const val place = "place"
             const val name = "name"
             const val comment = "comment"
         }
@@ -23,8 +24,9 @@ class MyDatabase {
                     "${BaseColumns._ID} INTEGER PRIMARY KEY," +
                     "${MyDBContract.MyEntry.image} BLOB," +
                     "${MyDBContract.MyEntry.date} TEXT," +
+                    "${MyDBContract.MyEntry.place} TEXT," +
                     "${MyDBContract.MyEntry.name} TEXT," +
-                    "${MyDBContract.MyEntry.comment} TEXT"
+                    "${MyDBContract.MyEntry.comment} TEXT)"
         val SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS ${MyDBContract.MyEntry.TABLE_NAME}"
 
         override fun onCreate(db: SQLiteDatabase) {
@@ -43,6 +45,7 @@ class MyDatabase {
             const val DATABASE_VERSION = 1
             const val DATABASE_NAME = "myDBfile.db"
         }
+
         fun selectAll(): MutableList<MyElement> {
             val readList = mutableListOf<MyElement>()
             val db = readableDatabase
@@ -55,7 +58,8 @@ class MyDatabase {
                         cursor.getBlob(1),
                         cursor.getString(2),
                         cursor.getString(3),
-                        cursor.getString(4))
+                        cursor.getString(4),
+                        cursor.getString(5))
                     )
                 }
             }
