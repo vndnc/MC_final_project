@@ -1,5 +1,6 @@
 package com.example.mc_finalproject
 
+import android.app.DatePickerDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.database.sqlite.SQLiteConstraintException
@@ -14,6 +15,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.example.mc_finalproject.databinding.StorageBinding
@@ -23,6 +25,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
+import java.util.Calendar
 
 class SaveFragment: Fragment() {
 
@@ -58,14 +61,29 @@ class SaveFragment: Fragment() {
                 e.printStackTrace()
             }
         }
+
         // 버튼 누르면 갤러리에서 선택한 사진 등록(일단 view에 보이게만 > 그냥 이미지 누르면으로 바꿀까요?
         binding.insertPhoto.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             requestGal.launch(intent)
         }
+        // 기본적으로 오늘 날짜가 뜨도록하고
+        var calendar = Calendar.getInstance()
+        var year = calendar.get(Calendar.YEAR)
+        var month = calendar.get(Calendar.MONTH)
+        var day = calendar.get(Calendar.DAY_OF_MONTH)
+        binding.viewDate.text = year.toString() + "/" + (month+1).toString() + "/" + day.toString()
 
-        // 저장버튼 누르면 db에 넣는 코드 추가해야함.
+        // 수정 버튼을 누르면 날짜를 수정할 수 있음
+        binding.inputDate.setOnClickListener {
+            val datePickerDialog = DatePickerDialog(requireContext(), {_, year, month, day ->
+                binding.viewDate.text = year.toString() + "/" + (month+1).toString() + "/" + day.toString()
+            }, year, month, day)
+            datePickerDialog.show()
+        }
+
+        // 저장 버튼 누르면 db에 저장
         val dbHelper = MyDatabase.MyDbHelper(requireContext())
         binding.insertBtn.setOnClickListener {
             var db = dbHelper.writableDatabase
@@ -73,12 +91,16 @@ class SaveFragment: Fragment() {
             val myentry = MyDatabase.MyDBContract.MyEntry
             val values = ContentValues().apply {
                 put(myentry.image, drawableToByteArray(binding.insertPhoto.drawable))
-                put(myentry.date, binding.date.text.toString())
+                // 이 날짜를 어떻게 넣어야할까요....
+                put(myentry.date, binding.viewDate.text.toString())
                 put(myentry.place, binding.place.text.toString())
                 put(myentry.name, binding.people.text.toString())
                 put(myentry.comment, binding.memo.text.toString())
+
             }
-            Log.d("TAG", values.toString())
+            // 로그는 잘 찍히는데 Toast메세지는 안뜨네요...
+            Toast.makeText(requireContext(), "정상적으로 저장되었습니다 :)", Toast.LENGTH_SHORT).show()
+            Log.d("TAG", "저장" + values.toString())
 
             val newRowId = db?.insertOrThrow(myentry.TABLE_NAME, null, values)
 
@@ -94,7 +116,6 @@ class SaveFragment: Fragment() {
 //                    arrayOf(binding.xx.text.toString())
 //                )
 //            }
-
             db.close()
 
             val getList = dbHelper.selectAll()
