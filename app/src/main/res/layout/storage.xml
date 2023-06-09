@@ -22,7 +22,7 @@
     <!--기본 이미지 교체해야함-->
     <ImageView
         android:id="@+id/insertPhoto"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/ic_launcher_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />

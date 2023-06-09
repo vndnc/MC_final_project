@@ -3,7 +3,12 @@ package com.example.mc_finalproject
 import android.content.ContentValues
 import android.content.Intent
 import android.database.sqlite.SQLiteConstraintException
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.VectorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.ByteArrayOutputStream
 
 class SaveFragment: Fragment() {
 
@@ -60,19 +66,22 @@ class SaveFragment: Fragment() {
         }
 
         // 저장버튼 누르면 db에 넣는 코드 추가해야함.
-         val dbHelper = MyDatabase.MyDbHelper(requireContext())
+        val dbHelper = MyDatabase.MyDbHelper(requireContext())
         binding.insertBtn.setOnClickListener {
             var db = dbHelper.writableDatabase
 
             val myentry = MyDatabase.MyDBContract.MyEntry
             val values = ContentValues().apply {
-                put(myentry.image, binding.insertPhoto.toString().toByteArray())
+                put(myentry.image, drawableToByteArray(binding.insertPhoto.drawable))
                 put(myentry.date, binding.date.text.toString())
                 put(myentry.place, binding.place.text.toString())
                 put(myentry.name, binding.people.text.toString())
                 put(myentry.comment, binding.memo.text.toString())
             }
             Log.d("TAG", values.toString())
+
+            val newRowId = db?.insertOrThrow(myentry.TABLE_NAME, null, values)
+
             // 예외처리 필요하면 추가 해주기
 //            try {
 //                val newRowId = db?.insertOrThrow(myentry.TABLE_NAME, null, values)
@@ -94,4 +103,33 @@ class SaveFragment: Fragment() {
             }
         }
     }
+}
+
+private fun drawableToByteArray(drawable: Drawable?): ByteArray? {
+    if (drawable is BitmapDrawable) {
+        // BitmapDrawable인 경우 바로 bitmap을 얻어와서 byte 배열로 변환합니다.
+        val bitmap = drawable.bitmap
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        val byteArray = stream.toByteArray()
+        return byteArray
+    } else if (drawable is VectorDrawable) {
+        // VectorDrawable인 경우 비트맵을 생성하여 캔버스에 그린 후 byte 배열로 변환합니다.
+        val bitmap = Bitmap.createBitmap(
+            drawable.intrinsicWidth,
+            drawable.intrinsicHeight,
+            Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        val byteArray = stream.toByteArray()
+
+        return byteArray
+    }
+
+    return null
 }

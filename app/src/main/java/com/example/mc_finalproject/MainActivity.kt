@@ -3,9 +3,9 @@ package com.example.mc_finalproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mc_finalproject.databinding.ActivityMainBinding
-import com.example.mc_finalproject.databinding.SearchBinding
 
 class MainActivity : AppCompatActivity() {
+    private val dbHelper = MyDatabase.MyDbHelper(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var binding = ActivityMainBinding.inflate(layoutInflater)
