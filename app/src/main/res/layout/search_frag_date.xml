@@ -23,17 +23,29 @@
 
     <!-- 검색 전엔 보이지 않게 + 검색한 날짜 띄워줘야함-->
     <TextView
+        android:id="@+id/resultText"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:gravity="left|center"
         android:text="0000년 00월 00일에 찍은 사진"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:visibility="gone" />
 
     <!-- 사진 불러와서 보여주는 용도 -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop" />
+    </LinearLayout>
 </LinearLayout>
